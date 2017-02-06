@@ -16,14 +16,14 @@ module OmniAuth
       }
 
       option :token_params, {
-        resource: 'https://graph.microsoft.com/'        
+        resource: 'https://graph.microsoft.com/'
       }
 
       uid { raw_info["id"] }
 
       info do
         {
-          'email' => raw_info["mail"],
+          'email' => (raw_info["mail"] || raw_info["userPrincipalName"]),
           'first_name' => raw_info["givenName"],
           'last_name' => raw_info["surname"],
           'name' => [raw_info["givenName"], raw_info["surname"]].join(' '),
