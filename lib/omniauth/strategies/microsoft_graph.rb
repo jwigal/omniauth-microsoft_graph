@@ -23,7 +23,7 @@ module OmniAuth
 
       info do
         {
-          'email' => raw_info["mail"],
+          'email' => (raw_info["mail"] || raw_info["userPrincipalName"]),
           'first_name' => raw_info["givenName"],
           'last_name' => raw_info["surname"],
           'name' => [raw_info["givenName"], raw_info["surname"]].join(' '),
@@ -44,7 +44,7 @@ module OmniAuth
 
       def callback_url
         options[:callback_url] || full_host + script_name + callback_path
-      end      
+      end
     end
   end
 end
